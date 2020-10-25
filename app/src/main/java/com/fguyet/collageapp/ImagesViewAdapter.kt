@@ -1,7 +1,6 @@
 package com.fguyet.collageapp
 
 import android.graphics.Bitmap
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,6 @@ class ImagesViewAdapter(private val dataSet: List<Bitmap>) :
         )
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        Log.d(TAG, position.toString() + " " + dataSet.size)
         holder.bind(dataSet[position])
     }
 

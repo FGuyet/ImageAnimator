@@ -11,32 +11,15 @@ object ImageProvider {
     suspend fun getImages(query: String, context: Context?): List<Bitmap> {
         if (context == null) throw IllegalStateException("Context cannot be null")
 
-        val images = listOf(
-            tintImage(
-                BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid),
-                Color.BLACK
-            ),
-            tintImage(
-                BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid),
-                Color.BLUE
-            ),
-            tintImage(
-                BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid),
-                Color.YELLOW
-            ),
-            tintImage(
-                BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid),
-                Color.GRAY
-            ),
-            tintImage(
-                BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid),
-                Color.MAGENTA
-            ),
-            tintImage(
-                BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid),
-                Color.CYAN
-            ),
-            BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid)
+        val initialBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid)
+
+        val images = listOf(initialBitmap,
+                tintImage(initialBitmap, Color.BLACK),
+                tintImage(initialBitmap, Color.BLUE),
+                tintImage(initialBitmap, Color.YELLOW),
+                tintImage(initialBitmap, Color.GRAY),
+                tintImage(initialBitmap, Color.MAGENTA),
+                tintImage(initialBitmap, Color.CYAN)
         )
         cachedImages[query] = images
         return images
