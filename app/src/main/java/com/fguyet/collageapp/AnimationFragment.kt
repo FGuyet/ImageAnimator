@@ -1,11 +1,11 @@
 package com.fguyet.collageapp
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import coil.load
 import kotlinx.android.synthetic.main.item_view_image.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.NonCancellable.isActive
@@ -18,7 +18,7 @@ class AnimationFragment : Fragment() {
 
     private var currentAnimation: Job? = null
     private var query by Delegates.notNull<String>()
-    private var imageIndexes by Delegates.notNull<ArrayList<Int>>()
+    private var imagesURLs by Delegates.notNull<ArrayList<String>>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,16 +30,14 @@ class AnimationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         query =
             arguments?.getString("query") ?: throw IllegalArgumentException("Query cannot be null")
-        imageIndexes = arguments?.getIntegerArrayList("imageIds") ?: throw IllegalArgumentException(
-            "imageIds cannot be null"
+        imagesURLs = arguments?.getStringArrayList("imagesURLs") ?: throw IllegalArgumentException(
+            "imagesURLs cannot be null"
         )
     }
 
     override fun onResume() {
         super.onResume()
-        val selectedImages =
-            ImageProvider.getCachedImages(query).filterIndexed { index, _ -> index in imageIndexes }
-        currentAnimation = uiScope.launch { loopThrough(selectedImages) }
+        currentAnimation = uiScope.launch { loopThrough(imagesURLs) }
     }
 
     override fun onPause() {
@@ -47,10 +45,10 @@ class AnimationFragment : Fragment() {
         super.onPause()
     }
 
-    private suspend fun loopThrough(images: List<Bitmap>) {
+    private suspend fun loopThrough(images: ArrayList<String>) {
         while (isActive) {
             images.forEach {
-                image_view.setImageBitmap(it)
+                image_view.load(it)
                 delay(IMAGE_DISPLAY_DURATION)
             }
         }

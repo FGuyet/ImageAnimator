@@ -14,7 +14,7 @@
             android:id="@+id/action_searchFragment_to_imageSelectionFragment"
             app:destination="@id/imageSelectionFragment">
             <argument
-                android:name="searchText"
+                android:name="query"
                 app:argType="string" />
         </action>
     </fragment>
@@ -32,8 +32,8 @@
                 app:argType="string" />
 
             <argument
-                android:name="imageIds"
-                app:argType="integer[]" />
+                android:name="imagesURLs"
+                app:argType="string[]" />
         </action>
         <action
             android:id="@+id/action_imageSelectionFragment_to_searchFragment"

@@ -1,11 +1,11 @@
 package com.fguyet.collageapp
 
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import kotlinx.android.synthetic.main.item_view_image.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -14,8 +14,11 @@ class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val image: ImageView = itemView.image_view
     private val checkBox: CheckBox = itemView.checkbox
 
-    fun bind(bitmap: Bitmap, listener: (Boolean) -> Unit) {
-        image.setImageBitmap(bitmap)
+    fun bind(url: String, listener: (Boolean) -> Unit) {
+        image.load(url) {
+            crossfade(true)
+            placeholder(R.drawable.bugdroid)
+        }
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             listener.invoke(isChecked)
             if (isChecked) {

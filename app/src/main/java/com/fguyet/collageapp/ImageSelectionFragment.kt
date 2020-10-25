@@ -1,6 +1,5 @@
 package com.fguyet.collageapp
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,7 @@ class ImageSelectionFragment : Fragment() {
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    private val dataSet = mutableListOf<Bitmap>()
+    private val dataSet = mutableListOf<String>()
     var imagesViewAdapter by Delegates.notNull<ImagesViewAdapter>()
 
     override fun onCreateView(
@@ -33,8 +32,9 @@ class ImageSelectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val query = getString(R.string.your_research, arguments?.getString("searchText"))
-        search_text.text = query
+        val query =
+            arguments?.getString("query") ?: throw IllegalStateException("Query cannot be null")
+        search_text.text = getString(R.string.your_research, query)
 
         images_recycler_view.apply {
             layoutManager = GridLayoutManager(context, GRID_LAYOUT_NUMBER_OF_COLUMNS)
@@ -42,27 +42,24 @@ class ImageSelectionFragment : Fragment() {
 
             uiScope.launch {
                 dataSet.clear()
-                dataSet.addAll(ImageProvider.getImages(query, context))
+                dataSet.addAll(ImageProvider.getImagesURL(query))
                 imagesViewAdapter.notifyDataSetChanged()
             }
             adapter = imagesViewAdapter
         }
 
         uiScope.launch {
-            imagesViewAdapter.selectedImagesStateFlow.collect {
+            imagesViewAdapter.selectedImagesURLsStateFlow.collect {
                 // Enable button only if at least 2 images are selected
                 animate_button.isEnabled = (it.size >= 2)
             }
         }
 
         animate_button.setOnClickListener {
-            val imageIds = imagesViewAdapter.selectedImages.map {
-                dataSet.indexOf(it)
-            }
 
             val bundle = bundleOf(
                 "query" to query,
-                "imageIds" to imageIds
+                "imagesURLs" to imagesViewAdapter.selectedImagesURLs
             )
 
             findNavController().navigate(

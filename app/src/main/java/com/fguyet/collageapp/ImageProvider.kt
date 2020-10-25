@@ -1,28 +1,28 @@
 package com.fguyet.collageapp
 
-import android.content.Context
 import android.graphics.*
+import android.util.Log
+import org.json.JSONObject
 
 object ImageProvider {
     private val cachedImages = mutableMapOf<String, List<Bitmap>>()
 
-    // TODO load images from API
-    // TODO remove temporary context parameter
-    suspend fun getImages(query: String, context: Context?): List<Bitmap> {
-        if (context == null) throw IllegalStateException("Context cannot be null")
+    suspend fun getImagesURL(query: String, maxResult: Int = MAX_RESULT_DEFAULT): List<String> {
+        val response = PixabayService.searchImages(query)
+        val hits = response.getJSONArray("hits")
 
-        val initialBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.bugdroid)
+        val maxIndex = minOf(hits.length(), maxResult)
 
-        val images = listOf(initialBitmap,
-                tintImage(initialBitmap, Color.BLACK),
-                tintImage(initialBitmap, Color.BLUE),
-                tintImage(initialBitmap, Color.YELLOW),
-                tintImage(initialBitmap, Color.GRAY),
-                tintImage(initialBitmap, Color.MAGENTA),
-                tintImage(initialBitmap, Color.CYAN)
-        )
-        cachedImages[query] = images
-        return images
+        val imagesURLs = mutableListOf<String>()
+
+        var index = 0
+        while (index < maxIndex) {
+            Log.i("TAG", index.toString())
+            imagesURLs.add((hits.get(index) as JSONObject).getString("webformatURL"))
+            index++
+        }
+
+        return imagesURLs
     }
 
     private fun tintImage(bitmap: Bitmap, color: Int): Bitmap {
@@ -39,4 +39,6 @@ object ImageProvider {
     fun clearCache() {
         cachedImages.clear()
     }
+
+    const val MAX_RESULT_DEFAULT = 20
 }

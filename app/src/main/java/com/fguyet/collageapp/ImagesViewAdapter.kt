@@ -1,6 +1,5 @@
 package com.fguyet.collageapp
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +8,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @ExperimentalCoroutinesApi
-class ImagesViewAdapter(private val dataSet: List<Bitmap>) :
+class ImagesViewAdapter(private val dataSet: List<String>) :
     RecyclerView.Adapter<ImageViewHolder>() {
 
-    private val _selectedImagesStateFlow = MutableStateFlow(emptyList<Bitmap>())
-    val selectedImagesStateFlow: StateFlow<List<Bitmap>> = _selectedImagesStateFlow
-    var selectedImages: List<Bitmap>
-        get() = _selectedImagesStateFlow.value
+    private val _selectedImagesURLsStateFlow = MutableStateFlow(emptyList<String>())
+    val selectedImagesURLsStateFlow: StateFlow<List<String>> = _selectedImagesURLsStateFlow
+    var selectedImagesURLs: List<String>
+        get() = _selectedImagesURLsStateFlow.value
         private set(value) {
-            _selectedImagesStateFlow.value = value
+            _selectedImagesURLsStateFlow.value = value
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -26,12 +25,12 @@ class ImagesViewAdapter(private val dataSet: List<Bitmap>) :
         )
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val bitmap = dataSet[position]
-        holder.bind(bitmap) { isSelected ->
-            selectedImages = if (isSelected) {
-                selectedImages.toMutableList().apply { add(bitmap) }
+        val url = dataSet[position]
+        holder.bind(url) { isSelected ->
+            selectedImagesURLs = if (isSelected) {
+                selectedImagesURLs.toMutableList().apply { add(url) }
             } else {
-                selectedImages.toMutableList().apply { remove(bitmap) }
+                selectedImagesURLs.toMutableList().apply { remove(url) }
             }
         }
     }
