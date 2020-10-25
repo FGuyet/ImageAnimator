@@ -26,7 +26,15 @@
         tools:layout="@layout/fragment_image_selection">
         <action
             android:id="@+id/action_imageSelectionFragment_to_animationFragment"
-            app:destination="@id/animationFragment" />
+            app:destination="@id/animationFragment">
+            <argument
+                android:name="query"
+                app:argType="string" />
+
+            <argument
+                android:name="imageIds"
+                app:argType="integer[]" />
+        </action>
         <action
             android:id="@+id/action_imageSelectionFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
