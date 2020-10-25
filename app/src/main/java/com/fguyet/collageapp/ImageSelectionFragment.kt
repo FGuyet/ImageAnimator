@@ -32,8 +32,8 @@ class ImageSelectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val query =
-            arguments?.getString("query") ?: throw IllegalStateException("Query cannot be null")
+        val query = arguments?.getString(context?.resources?.getString(R.string.key_query))
+            ?: throw IllegalStateException("Query cannot be null")
         search_text.text = getString(R.string.your_research, query)
 
         images_recycler_view.apply {
@@ -56,10 +56,15 @@ class ImageSelectionFragment : Fragment() {
         }
 
         animate_button.setOnClickListener {
+            val imagesURLsKey = context?.getString(R.string.key_images_urls)
+                ?: throw java.lang.IllegalStateException("imagesURLsKey cannot be null")
+
+            val queryKey = context?.getString(R.string.key_query)
+                ?: throw java.lang.IllegalStateException("queryKey cannot be null")
 
             val bundle = bundleOf(
-                "query" to query,
-                "imagesURLs" to imagesViewAdapter.selectedImagesURLs
+                queryKey to query,
+                imagesURLsKey to imagesViewAdapter.selectedImagesURLs
             )
 
             findNavController().navigate(

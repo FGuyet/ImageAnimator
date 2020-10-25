@@ -14,7 +14,7 @@
             android:id="@+id/action_searchFragment_to_imageSelectionFragment"
             app:destination="@id/imageSelectionFragment">
             <argument
-                android:name="query"
+                android:name="@string/key_query"
                 app:argType="string" />
         </action>
     </fragment>
@@ -28,11 +28,11 @@
             android:id="@+id/action_imageSelectionFragment_to_animationFragment"
             app:destination="@id/animationFragment">
             <argument
-                android:name="query"
+                android:name="@string/key_query"
                 app:argType="string" />
 
             <argument
-                android:name="imagesURLs"
+                android:name="@string/key_images_urls"
                 app:argType="string[]" />
         </action>
         <action

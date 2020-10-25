@@ -28,11 +28,12 @@ class AnimationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        query =
-            arguments?.getString("query") ?: throw IllegalArgumentException("Query cannot be null")
-        imagesURLs = arguments?.getStringArrayList("imagesURLs") ?: throw IllegalArgumentException(
-            "imagesURLs cannot be null"
-        )
+        query = arguments?.getString(context?.resources?.getString(R.string.key_query))
+            ?: throw IllegalArgumentException("Query cannot be null")
+
+        imagesURLs =
+            arguments?.getStringArrayList(context?.resources?.getString(R.string.key_images_urls))
+                ?: throw IllegalArgumentException("imagesURLs cannot be null")
     }
 
     override fun onResume() {
