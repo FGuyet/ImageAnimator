@@ -1,4 +1,4 @@
-package com.fguyet.collageapp
+package com.fguyet.collageapp.ui.animation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import coil.load
+import com.fguyet.collageapp.R
 import kotlinx.android.synthetic.main.item_view_image.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.NonCancellable.isActive

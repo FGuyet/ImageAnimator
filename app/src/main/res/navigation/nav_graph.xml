@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.fguyet.collageapp.SearchFragment"
+        android:name="com.fguyet.collageapp.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/imageSelectionFragment"
-        android:name="com.fguyet.collageapp.ImageSelectionFragment"
+        android:name="com.fguyet.collageapp.ui.selection.ImageSelectionFragment"
         android:label="fragment_image_selection"
         tools:layout="@layout/fragment_image_selection">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/animationFragment"
-        android:name="com.fguyet.collageapp.AnimationFragment"
+        android:name="com.fguyet.collageapp.ui.animation.AnimationFragment"
         android:label="fragment_animation"
         tools:layout="@layout/fragment_animation">
         <action

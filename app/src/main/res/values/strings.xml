@@ -10,4 +10,5 @@
     <string name="key_images_urls">images_urls</string>
     <string name="key_query">query</string>
     <string name="not_enough_results">Not enough results for this topic. Please try again with another query.</string>
+    <string name="image_animation">Image animation</string>
 </resources>

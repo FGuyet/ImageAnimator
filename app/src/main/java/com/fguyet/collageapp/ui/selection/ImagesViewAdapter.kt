@@ -1,8 +1,9 @@
-package com.fguyet.collageapp
+package com.fguyet.collageapp.ui.selection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.fguyet.collageapp.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +14,7 @@ class ImagesViewAdapter(private val dataSet: List<String>) :
 
     private val _selectedImagesURLsStateFlow = MutableStateFlow(emptyList<String>())
     val selectedImagesURLsStateFlow: StateFlow<List<String>> = _selectedImagesURLsStateFlow
+
     var selectedImagesURLs: List<String>
         get() = _selectedImagesURLsStateFlow.value
         private set(value) {
@@ -20,9 +22,7 @@ class ImagesViewAdapter(private val dataSet: List<String>) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ImageViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_view_image, parent, false)
-        )
+        ImageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_view_image, parent, false))
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val url = dataSet[position]
