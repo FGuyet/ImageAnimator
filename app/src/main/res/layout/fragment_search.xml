@@ -9,6 +9,9 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/image_search_input"
         android:layout_width="match_parent"
+        android:imeOptions="actionDone"
+        android:inputType="textAutoCorrect"
+        android:maxLines="1"
         android:layout_height="wrap_content"
         android:hint="@string/type_your_research_here_hint"
         app:layout_constraintBottom_toBottomOf="parent"
