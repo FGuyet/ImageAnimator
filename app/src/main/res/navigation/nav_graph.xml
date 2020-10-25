@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.fguyet.collageapp.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_imageSelectionFragment"
+            app:destination="@id/imageSelectionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageSelectionFragment"
+        android:name="com.fguyet.collageapp.ImageSelectionFragment"
+        android:label="fragment_image_selection"
+        tools:layout="@layout/fragment_image_selection" >
+        <action
+            android:id="@+id/action_imageSelectionFragment_to_animationFragment"
+            app:destination="@id/animationFragment" />
+        <action
+            android:id="@+id/action_imageSelectionFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/animationFragment"
+        android:name="com.fguyet.collageapp.AnimationFragment"
+        android:label="fragment_animation"
+        tools:layout="@layout/fragment_animation" >
+        <action
+            android:id="@+id/action_animationFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+</navigation>
