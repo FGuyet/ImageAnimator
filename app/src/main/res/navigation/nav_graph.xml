@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_imageSelectionFragment"
-            app:destination="@id/imageSelectionFragment" />
+            app:destination="@id/imageSelectionFragment">
+            <argument
+                android:name="searchText"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment

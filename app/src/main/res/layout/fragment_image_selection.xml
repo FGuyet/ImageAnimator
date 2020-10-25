@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ImageSelectionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/search_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Image Selection Fragment" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
