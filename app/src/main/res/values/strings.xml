@@ -5,4 +5,5 @@
     <string name="search">Search</string>
     <string name="type_your_research_here_hint">Type your research here</string>
     <string name="your_research">Images corresponding to your \"%s\" research: </string>
+    <string name="image">Image</string>
 </resources>
