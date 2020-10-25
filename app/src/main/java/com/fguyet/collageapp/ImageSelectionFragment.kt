@@ -1,5 +1,6 @@
 package com.fguyet.collageapp
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_image_selection.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -42,8 +44,26 @@ class ImageSelectionFragment : Fragment() {
 
             uiScope.launch {
                 dataSet.clear()
-                dataSet.addAll(ImageProvider.getImagesURL(query))
-                imagesViewAdapter.notifyDataSetChanged()
+                val elements = ImageProvider.getImagesURL(query)
+
+                if (elements.size < 2) {
+                    // Not enough results, going back to research fragment
+                    Snackbar.make(
+                        view,
+                        context.getString(R.string.not_enough_results),
+                        Snackbar.LENGTH_LONG
+                    ).apply {
+                        this.view.setBackgroundColor(Color.RED)
+                        this.show()
+                    }
+                    findNavController().navigate(
+                        R.id.action_imageSelectionFragment_to_searchFragment
+                    )
+                } else {
+                    dataSet.addAll(elements)
+                    imagesViewAdapter.notifyDataSetChanged()
+                }
+
             }
             adapter = imagesViewAdapter
         }

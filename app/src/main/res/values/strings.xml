@@ -2,11 +2,12 @@
     <string name="app_name">CollageApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search_for_images">Search for images here…</string>
+    <string name="search_for_images">Type your image research here...</string>
     <string name="your_research">Images corresponding to your \"%s\" research: </string>
     <string name="image">Image</string>
     <string name="create_animation">Create animation</string>
     <string name="search">Search</string>
     <string name="key_images_urls">images_urls</string>
     <string name="key_query">query</string>
+    <string name="not_enough_results">Not enough results for this topic. Please try again with another query.</string>
 </resources>

@@ -14,11 +14,6 @@ import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        ImageProvider.clearCache()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
