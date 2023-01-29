@@ -1,7 +1,7 @@
 # Image Animator
 
 ## Overview
-This is a small app that contains 3 screens:
+This is a small app developped in a few hours that contains 3 screens:
 
 ### Search Screen
 - The user search for a topic to find images about.
